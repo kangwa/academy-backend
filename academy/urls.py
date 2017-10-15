@@ -21,6 +21,7 @@ admin.site.index_title = 'Academy Admin Portal'
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include('apps.backend.urls'), name="rest-api"),
+    url(r'^api/auth/', include('djoser.urls')),
+    url(r'^api/auth/', include('djoser.urls.authtoken')),
 ]
