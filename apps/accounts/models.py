@@ -1,7 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import (
-	BaseUserManager, AbstractBaseUser
-)
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 class UserManager(BaseUserManager):
 
@@ -42,6 +42,9 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
 	email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
+	date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+	first_name = models.CharField(_('first name'), max_length=30, blank=True)
+	last_name = models.CharField(_('last name'), max_length=30, blank=True)
 	active = models.BooleanField(default=True)
 	staff = models.BooleanField(default=False)
 	admin = models.BooleanField(default=False)
