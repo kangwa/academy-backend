@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # local applications
-    'apps.backend'
+    'apps.accounts',
+    'apps.backend',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+
+# Custom Auth User Model
+AUTH_USER_MODEL = 'accounts.User'
