@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
+
 class UserManager(BaseUserManager):
 
 	def create_user(self, email, password=None):
@@ -41,6 +42,9 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+	"""
+	Custom User Model
+	"""
 	email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
 	date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 	first_name = models.CharField(_('first name'), max_length=30, blank=True)
@@ -90,6 +94,17 @@ class User(AbstractBaseUser):
 		return self.active
 
 
+class Organization(models.Model):
+	"""
+	Organization Model represents a customer account
+	"""
+	name = models.CharField(max_length=255)
+	address = models.TextField(blank=True, null=True)
+	email = models.EmailField(blank=True, null=True)
+	phone = models.CharField(max_length=20, blank=True, null=True)
+	active = models.BooleanField(default=False)
+	created = models.DateTimeField(auto_now_add=True)
+	updated = models.DateTimeField(auto_now=True)
 
-
-
+	def __str__(self):
+		return self.name
